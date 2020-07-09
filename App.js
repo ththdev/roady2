@@ -1,34 +1,22 @@
-import React, { useEffect } from 'react';
-import { SafeAreaView, StatusBar, Text } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage'
-import moment from 'moment'
-import CellRenderer from './src/components/CellRenderer'
+import React from 'react';
+import { SafeAreaView, StatusBar, ScrollView } from 'react-native';
+import { Provider } from 'mobx-react'
+import MainStore from './src/stores/main';
+import { ThemeProvider } from 'styled-components/native'
+import theme from './src/theme'
+import AppLayout from './src/components/base/AppLayout'
+import AppNavigation from './src/navigations/AppNavigation'
+
+const mainStore = new MainStore()
 
 const App = () => {
-  useEffect(() => {
-    // initialize dates
-    async function initialize() {
-      const data = []
-      for(var i=0; i < 30; i++) {
-        data.push({
-          date: moment().add(i, 'days').format('D')
-        })
-      }
-      await AsyncStorage.setItem('dates', JSON.stringify(data));
-    }
-
-    initialize()
-  }, [])
-
-  
-
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <CellRenderer />
-      </SafeAreaView>
-    </>
+    <ThemeProvider theme={theme}>
+      <Provider store={mainStore}>
+          <StatusBar barStyle="dark-content" />
+          <AppNavigation />
+      </Provider>
+    </ThemeProvider>
   );
 };
 

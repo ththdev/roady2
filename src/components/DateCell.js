@@ -1,12 +1,8 @@
 import React from 'react'
-import { Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 
-const { width } = Dimensions.get('window')
-const cellWidth = width / 6
-
-
 const DateCell = ({ date }) => {
+
     return (
         <Container>
             <CellText>{date}</CellText>
@@ -15,15 +11,16 @@ const DateCell = ({ date }) => {
 }
 
 const Container = styled.TouchableOpacity`
-    width: ${cellWidth + "px"};
-    height: ${cellWidth + "px"};
-    /* border: 1px solid #000; */
+    width: 50px;
+    height: ${props => props.theme.cellSize + "px"};
     justify-content: center;
     align-items: center;
+    background: #fff;
 `
 
 const CellText = styled.Text`
     font-size: 16px;
+    color: ${props => props.theme.colors.gray};
 `
 
 export default DateCell
