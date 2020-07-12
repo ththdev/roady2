@@ -2,10 +2,13 @@ import { observable, action } from 'mobx'
 
 class MainStore {
     @observable
-    cellWidth = 50;
+    cellSize = 35;
 
     @observable
-    drawable = true;
+    addEventModal = false;
+
+    @observable
+    roadRendererRef = null;
 
     @action
     changeCellWidth = width => {
@@ -13,9 +16,13 @@ class MainStore {
     }
 
     @action
-    setDrawable = bool => {
-        this.drawable = bool;
-        console.log(this.drawable)
+    setAddEventModal = bool => {
+        this.addEventModal = bool;
+    }
+
+    @action
+    initRoadRenderer = ref => {
+        this.roadRendererRef = ref
     }
 }
 

@@ -1,20 +1,24 @@
 import React, { useState } from 'react'
-import { TouchableWithoutFeedback, Dimensions, KeyboardAvoidingView, TextInput } from 'react-native'
+import { TouchableWithoutFeedback, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
 import Modal from 'react-native-modal'
+import useStores from '../lib/hooks/useStores'
+import { observer } from 'mobx-react'
 
 const { width, height } = Dimensions.get('window');
 
-const AddEventModal = ({ modalVisible, setModalVisible }) => {
+const AddEventModal = observer(() => {
     const {eventName, setEventName} = useState("")
+    const { addEventModal, setAddEventModal } = useStores()
+
     return (
         <CustomModal 
-            isVisible={modalVisible} 
+            isVisible={addEventModal} 
             deviceHeight={height} 
             deviceWidth={width}
             style={{ justifyContent: "flex-end" }}
         >
-            <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+            <TouchableWithoutFeedback onPress={() => setAddEventModal(false)}>
                 <CloseOverlay />
             </TouchableWithoutFeedback>
             <Container>
@@ -26,7 +30,7 @@ const AddEventModal = ({ modalVisible, setModalVisible }) => {
             </Container>
         </CustomModal>
     )
-}
+});
 
 const Container = styled.View`
     width: 100%;

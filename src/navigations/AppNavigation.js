@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 const AppNavigation = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator headerMode="none" >
                 <Stack.Screen name="Main" component={Main} />
                 <Stack.Screen name="AddEvent" component={AddEvent} />
             </Stack.Navigator>
